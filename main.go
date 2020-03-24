@@ -8,7 +8,7 @@
 package main
 
 import (
-	"./handle"
+	"go-dbsync/handle"
 )
 
 func main() {

@@ -36,16 +36,3 @@ dbsync是数据库同步工具,使用go编写，主要特性有
 1. insert 117275 条记录 14S TPS 8376/s
 2. update 117275 条记录 44S TPS 2665/s
 
-## problem
-如果有任何疑问或错误，欢迎在 issues 进行提问或给予修正意见。 如果喜欢或对你有所帮助，欢迎 Star。
-
-我是小铭哥 专注做后台开发和系统架构
-我在重庆两江新区。
-
-<p align="center"><img src="doc/wx/2074030723.jpg" width="50%" height="50%" alt="wx Logo"></p>
-
-
-
-## License
-
-所有文章采用[知识共享署名-非商业性使用-相同方式共享 3.0 中国大陆许可协议](https://creativecommons.org/licenses/by-nc-sa/3.0/cn/)进行许可。

@@ -17,7 +17,7 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/lib/pq"
 	_ "cloud.google.com/go"
-	_ "github.com/mattn/go-oci8"
+	//_ "github.com/mattn/go-oci8"
 )
 
 func Setup() {
@@ -370,7 +370,14 @@ func insertSql(dbtype string, execInfo ExecInfo) []string {
 					if strings.Contains(TmpValueStr, "'") {
 						TmpValueStr = strings.Replace(TmpValueStr, "'", "''", -1)
 					}
-					RowTmpValueStr += "'" + TmpValueStr + "'" + ","
+
+					//edit by raoweili, 2020.03.24, 非字符串，如果是空置，则设置成null
+					if(execInfo.ColumnMap[ColumnArr[j]] != "varchar" && TmpValueStr == "") {
+						RowTmpValueStr += "null" + ","
+					} else {
+						RowTmpValueStr += "'" + TmpValueStr + "'" + ","
+					}
+
 				}
 				if endflag {
 					RowTmpValueStr = ""

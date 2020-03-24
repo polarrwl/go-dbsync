@@ -17,11 +17,10 @@ import (
 
 	"github.com/tidwall/gjson"
 
-	"../config"
-	"../db"
-	"../pkg/cache"
-	"../pkg/logging"
-	"../pkg/system"
+	"go-dbsync/config"
+	"go-dbsync/db"
+	"go-dbsync/pkg/cache"
+	"go-dbsync/pkg/logging"
 	gcache "github.com/patrickmn/go-cache"
 )
 
@@ -30,7 +29,8 @@ var DesDBPtr *db.DBServer
 
 func Setup() {
 	logging.Info(fmt.Sprintf("DataSync handle Setup , read config ."))
-	filepath := system.GetCurrentDirectory() + "/config.json"
+	//filepath := system.GetCurrentDirectory() + "/config.json"
+	filepath := "config.json"
 	config.ParseConfig(filepath)
 	//cache init.
 	cache.CacheInit()
@@ -99,6 +99,7 @@ func Work() {
 		}
 	}
 	strColumns, _ := json.Marshal(tableColumnsMap)
+
 	logging.Info(fmt.Sprintf("tableColumnsMap : %s", string(strColumns)))
 	//get Des Table to redis.
 	srcTableName := jobMap["srcTable"].String()
@@ -212,8 +213,8 @@ func CompareWithCache(tableColumnsMap map[string]string, renameResult []map[stri
 		keysArr = append(keysArr, k)
 	}
 	//logging.Info(keysArr)
-	insertExec := db.ExecInfo{DesDBPtr.DBName, tableName, db.INSERT, tablePK, []map[string]string{}}
-	updateExec := db.ExecInfo{DesDBPtr.DBName, tableName, db.UPDATE, tablePK, []map[string]string{}}
+	insertExec := db.ExecInfo{DesDBPtr.DBName, tableName, db.INSERT, tablePK, []map[string]string{}, tableColumnsMap}
+	updateExec := db.ExecInfo{DesDBPtr.DBName, tableName, db.UPDATE, tablePK, []map[string]string{}, tableColumnsMap}
 	for _, v := range renameResult {
 		handle := ""
 		srcQueryStr := ""

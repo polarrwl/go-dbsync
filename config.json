@@ -1,18 +1,18 @@
 {
     "Name" : "dbsync",
-    "SrcDB" : { "type" : "postgres" , "User" : "" , "Passwd" : "" , "Host" : "192.168.0.0:5432" , "DBName" : "insight" },
-    "DesDB" : { "type" : "mysql" , "User" : "" , "Passwd" : "" , "Host" : "192.168.0.0:3306" , "DBName" : "insight" },
+    "SrcDB" : { "type" : "mysql" , "User" : "root" , "Passwd" : "root" , "Host" : "127.0.0.1:3306" , "DBName" : "score_model_0904" },
+    "DesDB" : { "type" : "mysql" , "User" : "root" , "Passwd" : "root" , "Host" : "127.0.0.1:3306" , "DBName" : "rwl_sync_test" },
     "DataSync": [
         {
             "job": {
-                "name": "postgres2mysql",
-                "srcSql": " select *  FROM testplan order by planid ",
-                "srcTable": "testplan",
-                "desTable": "testplan",
+                "name": "mysqlsync",
+                "srcSql": " select *  FROM t_dict",
+                "srcTable": "t_dict",
+                "desTable": "sync_t_dict",
                 "FieldsMap": {
                 },
-                "srcTablePK": "planid",
-                "desTablePK": "planid",
+                "srcTablePK": "id",
+                "desTablePK": "id",
                 "syncType": "full"
             }
         }

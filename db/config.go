@@ -53,6 +53,7 @@ type ExecInfo struct {
 	Handle    string
 	PK        string
 	Content   []map[string]string
+	ColumnMap map[string]string
 }
 
 type ReNameMapInfo struct {
